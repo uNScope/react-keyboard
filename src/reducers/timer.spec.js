@@ -1,4 +1,5 @@
 import Timer, {TIME_LIMIT, initialState} from './timer'
+import Letters from "./letters";
 
 describe('>>> REDUCERS --- Test timerReducers', () => {
   let state = {};
@@ -22,4 +23,10 @@ describe('>>> REDUCERS --- Test timerReducers', () => {
     let testState = Timer(state, { type: "" });
     expect(testState).toEqual(initialState);
   });
+
+  test('+++ without state return initial state', () => {
+    let testState = Timer(undefined, { type: "" });
+    expect(testState).toEqual(initialState);
+  });
+
 });

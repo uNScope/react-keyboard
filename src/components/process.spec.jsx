@@ -2,7 +2,7 @@ import React from 'react';
 import * as sinon from "sinon";
 import { shallow } from 'enzyme';
 
-import { Process } from './process'
+import { Process, mapDispatchToProps } from './process'
 import { TIME_LIMIT } from "../reducers/timer";
 
 describe('>>> COMPONENTS --- Test Process component', () => {
@@ -62,6 +62,52 @@ describe('>>> COMPONENTS --- Test Process component', () => {
     instance.startProcess();
     instance.handleTimerTick();
     expect(instance.state.isFinished).toEqual(true);
+  });
+
+  test('+++ continue when time is not over', () => {
+    let testProps = {...props, timeLimit: 10};
+    let container = shallow(<Process {...testProps} />);
+    let instance = container.instance();
+
+    instance.startProcess();
+    instance.handleTimerTick();
+    expect(instance.state.isFinished).toEqual(false);
+  });
+
+  test('+++ dispatched timer tick return need action', () => {
+    let dispatch = jest.fn();
+    let dispatchProps = mapDispatchToProps(dispatch);
+
+    dispatchProps.timerTick();
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'TIMER_TICK' });
+  });
+
+  test('+++ dispatched generate letters return need action', () => {
+    let dispatch = jest.fn();
+    let dispatchProps = mapDispatchToProps(dispatch);
+
+    dispatchProps.generateLetters();
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'GENERATE_LETTERS' });
+  });
+
+  test('+++ dispatched check letter return need action', () => {
+    let dispatch = jest.fn();
+    let dispatchProps = mapDispatchToProps(dispatch);
+
+    dispatchProps.checkLetter('a');
+    expect(dispatch.mock.calls[0][0]).toEqual({
+      type: 'CHECK_LETTER',
+      letter: 'a'
+    });
+  });
+
+  test('+++ dispatched check letter return need action', () => {
+    let dispatch = jest.fn();
+    let dispatchProps = mapDispatchToProps(dispatch);
+
+    dispatchProps.resetProcess();
+    expect(dispatch.mock.calls[0][0]).toEqual({type: 'RESET_INFO'});
+    expect(dispatch.mock.calls[1][0]).toEqual({type: 'RESET_LETTERS'});
   });
 
 });

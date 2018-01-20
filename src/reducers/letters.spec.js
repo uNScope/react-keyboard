@@ -32,4 +32,10 @@ describe('>>> REDUCERS --- Test lettersReducers', () => {
     let testState = Letters(state, { type: "" });
     expect(testState).toEqual(initialState);
   });
+
+  test('+++ without state return initial state', () => {
+    let testState = Letters(undefined, { type: "" });
+    expect(testState).toEqual(initialState);
+  });
+
 });
