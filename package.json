@@ -5,6 +5,7 @@
   "main": "''",
   "scripts": {
     "start": "webpack-dev-server --progress --profile --colors",
+    "build": "webpack --config webpack.build.config.js --progress",
     "lint": "eslint --ext js --ext jsx src || exit 0",
     "dev": " webpack-dashboard -- webpack-dev-server",
     "test": "export NODE_ENV=test && jest --setupTestFrameworkScriptFile ./jest.setup.js"
