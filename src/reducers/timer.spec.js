@@ -1,5 +1,4 @@
 import Timer, {TIME_LIMIT, initialState} from './timer'
-import Letters from "./letters";
 
 describe('>>> REDUCERS --- Test timerReducers', () => {
   let state = {};
