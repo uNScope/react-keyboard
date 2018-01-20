@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "6"
+env:
+  global:
+  - CXX=g++-4.8
+addons:
+  sauce_connect: true
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+before_install:
+  - echo "Updating npm"
+  - npm update -g
+  - npm --version
+install:
+  - npm install
+before_script:
+  - npm run build
+script:
+  - echo "jest test with code coverage"
+  - npm test
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
