@@ -5,7 +5,6 @@ env:
   global:
   - CXX=g++-4.8
 addons:
-  sauce_connect: true
   apt:
     sources:
     - ubuntu-toolchain-r-test
@@ -20,6 +19,8 @@ install:
 before_script:
   - npm run build
 script:
+  - echo "check lint"
+  - npm run lint
   - echo "jest test with code coverage"
   - npm test
 after_success:

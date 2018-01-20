@@ -22,7 +22,7 @@ module.exports = {
     filename: '[chunkhash].js'
   },
   resolve: {
-    extensions: ['.js', '.j sx']
+    extensions: ['.js', '.jsx']
   },
   module: {
     loaders
